@@ -353,7 +353,7 @@
     
     function getImagePath(page) {
       const num = String(page).padStart(4, '0');
-      return `my-file_page-${num}.jpg`;
+      return `acx3_Page_${num}.jpg`;
     }
     
     function updateView() {
@@ -460,13 +460,13 @@
     });
     
     lightboxContent.addEventListener('mousedown', (e) => {
-      // Only start dragging if zoomed in
+    
       if (scale > minScale * 1.01) {
         e.preventDefault();
         isDragging = true;
         startX = e.clientX - posX;
         startY = e.clientY - posY;
-        // Immediately set cursor to grabbing on both elements
+       
         lightboxImage.style.cursor = 'grabbing';
         lightboxContent.style.cursor = 'grabbing';
       }
@@ -483,7 +483,7 @@
     });
     
     document.addEventListener('mouseup', () => {
-      // Stop dragging when mouse button is released
+     
       if (isDragging) {
         isDragging = false;
         // Reset cursor to grab when released
@@ -492,9 +492,8 @@
       }
     });
     
-    // Update cursor when zoom changes
+    
     function updateCursor() {
-      // Don't change cursor while actively dragging
       if (!isDragging) {
         if (scale > minScale * 1.01) {
           lightboxImage.style.cursor = 'grab';
