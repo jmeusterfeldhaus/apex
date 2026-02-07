@@ -14,57 +14,47 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 4px;
-    }
-    
-    @media (min-width: 768px) {
-      body { padding: 8px; }
-    }
-    
-    @media (min-width: 1024px) {
-      body { padding: 12px; }
-    }
-    
-    .viewer { 
-      max-width: 1400px; 
-      width: 100%; 
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .image-container {
-      background: #e7e3dc;
-      border-radius: 8px;
-      padding: 4px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: calc(100vh - 80px);
       overflow: hidden;
     }
     
-    @media (min-width: 768px) {
-      .image-container {
-        border-radius: 10px;
-        padding: 6px;
-        height: calc(100vh - 90px);
-      }
+    .viewer { 
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
     }
     
-    @media (min-width: 1024px) {
+    .main-view {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .image-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 80px;
+    }
+    
+    @media (max-width: 768px) {
       .image-container {
-        padding: 8px;
-        height: calc(100vh - 100px);
+        padding: 10px 60px;
       }
     }
     
     .image-container img {
-      width: 100%;
-      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
       border-radius: 4px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
       cursor: zoom-in;
       transition: transform 0.2s;
     }
@@ -73,86 +63,108 @@
       transform: scale(1.01); 
     }
     
-    @media (min-width: 768px) {
-      .image-container img:hover { 
-        transform: scale(1.02); 
-      }
-    }
-    
-    .controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      margin-top: 6px;
-      flex-wrap: wrap;
-    }
-    
-    @media (min-width: 768px) {
-      .controls {
-        gap: 12px;
-        margin-top: 8px;
-      }
-    }
-    
-    .btn {
-      background: #c9bfae;
+    /* Navigation buttons on sides */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(201, 191, 174, 0.9);
       color: #4a4035;
       border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 13px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 20px;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      white-space: nowrap;
+      transition: background 0.2s, transform 0.1s, opacity 0.2s;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
     }
     
-    @media (min-width: 768px) {
-      .btn {
-        padding: 8px 16px;
-        font-size: 14px;
+    @media (max-width: 768px) {
+      .nav-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
       }
     }
     
-    .btn:hover { background: #b8aa96; }
-    .btn:active { transform: scale(0.97); }
-    .btn:disabled { background: #e0dad0; color: #a39a8d; cursor: not-allowed; }
+    .nav-btn:hover { 
+      background: rgba(184, 170, 150, 0.95);
+      transform: translateY(-50%) scale(1.05);
+    }
+    
+    .nav-btn:active { 
+      transform: translateY(-50%) scale(0.95); 
+    }
+    
+    .nav-btn:disabled { 
+      background: rgba(224, 218, 208, 0.5);
+      color: #a39a8d;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+    
+    .nav-btn.prev {
+      left: 15px;
+    }
+    
+    .nav-btn.next {
+      right: 15px;
+    }
+    
+    @media (max-width: 768px) {
+      .nav-btn.prev {
+        left: 8px;
+      }
+      .nav-btn.next {
+        right: 8px;
+      }
+    }
+    
+    /* Bottom controls bar */
+    .bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(212, 201, 184, 0.95), rgba(212, 201, 184, 0));
+      padding: 20px 15px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(10px);
+    }
     
     .page-info {
       color: #5a4f42;
-      font-size: 13px;
-      min-width: 60px;
-      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
     }
     
     @media (min-width: 768px) {
       .page-info {
-        font-size: 14px;
-        min-width: 70px;
+        font-size: 15px;
       }
     }
     
     .page-dots {
       display: flex;
       justify-content: center;
-      gap: 5px;
-      margin-top: 6px;
+      gap: 6px;
       flex-wrap: wrap;
       padding: 0 10px;
-    }
-    
-    @media (min-width: 768px) {
-      .page-dots {
-        gap: 6px;
-        margin-top: 8px;
-      }
     }
     
     .dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #d4c9b8;
+      background: rgba(212, 201, 184, 0.6);
       cursor: pointer;
       transition: background 0.2s, transform 0.2s;
     }
@@ -164,8 +176,15 @@
       }
     }
     
-    .dot:hover { background: #c9bfae; transform: scale(1.2); }
-    .dot.active { background: #8b7355; }
+    .dot:hover { 
+      background: #c9bfae; 
+      transform: scale(1.3); 
+    }
+    
+    .dot.active { 
+      background: #8b7355;
+      transform: scale(1.2);
+    }
     
     /* Lightbox */
     .lightbox {
@@ -311,17 +330,21 @@
 </head>
 <body>
   <div class="viewer">
-    <div class="image-container">
-      <img id="pageImage" src="" alt="Page" onclick="openLightbox()">
+    <div class="main-view">
+      <div class="image-container">
+        <img id="pageImage" src="" alt="Page" onclick="openLightbox()">
+      </div>
+      
+      <!-- Side navigation buttons -->
+      <button class="nav-btn prev" id="prevBtn" onclick="changePage(-1)">‹</button>
+      <button class="nav-btn next" id="nextBtn" onclick="changePage(1)">›</button>
     </div>
     
-    <div class="controls">
-      <button class="btn" id="prevBtn" onclick="changePage(-1)">← Previous</button>
+    <!-- Bottom bar with page info and dots -->
+    <div class="bottom-bar">
       <span class="page-info"><span id="currentPage">1</span> / 11</span>
-      <button class="btn" id="nextBtn" onclick="changePage(1)">Next →</button>
+      <div class="page-dots" id="dots"></div>
     </div>
-    
-    <div class="page-dots" id="dots"></div>
   </div>
 
   <!-- Lightbox -->
@@ -345,7 +368,7 @@
     
     // Zoom state
     let scale = 1;
-    let minScale = 0.5; // Will be set when image loads
+    let minScale = 0.5;
     let posX = 0;
     let posY = 0;
     let isDragging = false;
@@ -389,7 +412,6 @@
       resetZoom();
       document.body.style.overflow = 'hidden';
       
-      // Fit image to screen initially
       setTimeout(() => {
         fitImageToScreen();
       }, 100);
@@ -407,8 +429,8 @@
       const scaleX = containerWidth / imgWidth;
       const scaleY = containerHeight / imgHeight;
       
-      scale = Math.min(scaleX, scaleY) * 0.95; // 95% to leave some margin
-      minScale = scale; // Set minimum zoom to the fit-to-screen size
+      scale = Math.min(scaleX, scaleY) * 0.95;
+      minScale = scale;
       posX = 0;
       posY = 0;
       updateZoom();
@@ -423,7 +445,6 @@
       const oldScale = scale;
       scale = Math.max(minScale, Math.min(5, scale + delta));
       
-      // If we've reached minimum scale, reset position to center
       if (scale === minScale) {
         posX = 0;
         posY = 0;
@@ -454,26 +475,22 @@
     const lightboxImage = document.getElementById('lightboxImage');
     const lightboxContent = document.getElementById('lightboxContent');
     
-    // Prevent image drag default behavior
     lightboxImage.addEventListener('dragstart', (e) => {
       e.preventDefault();
     });
     
     lightboxContent.addEventListener('mousedown', (e) => {
-    
       if (scale > minScale * 1.01) {
         e.preventDefault();
         isDragging = true;
         startX = e.clientX - posX;
         startY = e.clientY - posY;
-       
         lightboxImage.style.cursor = 'grabbing';
         lightboxContent.style.cursor = 'grabbing';
       }
     });
     
     document.addEventListener('mousemove', (e) => {
-      // Only move if we're actively dragging
       if (isDragging) {
         e.preventDefault();
         posX = e.clientX - startX;
@@ -483,15 +500,12 @@
     });
     
     document.addEventListener('mouseup', () => {
-     
       if (isDragging) {
         isDragging = false;
-        // Reset cursor to grab when released
         lightboxImage.style.cursor = scale > minScale * 1.01 ? 'grab' : 'default';
         lightboxContent.style.cursor = 'default';
       }
     });
-    
     
     function updateCursor() {
       if (!isDragging) {
