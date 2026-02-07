@@ -34,23 +34,6 @@
   overflow: hidden;
 }
 
-I see the issue now! The problem is that the .image-container has object-fit: contain on the image, but in landscape the bottom bar is covering it. Let me fix this properly by making the image container account for the bottom bar height:
-Replace the .image-container section and add a specific landscape fix:
-css.image-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 80px;
-}
-
-@media (max-width: 768px) {
-  .image-container {
-    padding: 10px 60px;
-  }
-}
-
 .image-container img {
   max-width: 100%;
   max-height: 100%;
@@ -65,11 +48,17 @@ css.image-container {
 
 @media (max-width: 768px) and (orientation: landscape) {
   .image-container {
-    padding: 10px 60px 90px 60px; /* Add bottom padding to lift image up */
+    padding: 10px 60px;
+    height: calc(100% - 80px); /* Reduce container height by bottom bar height */
+  }
+  
+  .image-container img {
+    max-height: 100%; /* Now 100% is of the reduced container */
   }
   
   .bottom-bar {
-    padding: 12px 15px 10px; /* Make bottom bar more compact */
+    padding: 12px 15px 10px;
+    height: 80px; /* Fixed height so image can calculate properly */
   }
   
   .page-info {
