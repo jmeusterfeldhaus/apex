@@ -66,21 +66,29 @@
       }
     }
 
-    @media (max-width: 768px) and (orientation: landscape) {
-      .bottom-bar {
-        padding: 10px 15px 8px;
-      }
-      
-      .page-info {
-        font-size: 12px;
-      }
-      
-      .dot {
-        width: 7px;
-        height: 7px;
-      }
-    }
-    
+ @media (max-width: 768px) and (orientation: landscape) {
+  .viewer {
+    height: 100vh;
+    height: -webkit-fill-available; /* Safari fix */
+  }
+  
+  .image-container {
+    padding: 5px 60px 5px 60px;
+  }
+  
+  .bottom-bar {
+    padding: 8px 15px 8px;
+  }
+  
+  .page-info {
+    font-size: 12px;
+  }
+  
+  .dot {
+    width: 7px;
+    height: 7px;
+  }
+}
     /* Navigation buttons */
     .nav-btn {
       position: absolute;
