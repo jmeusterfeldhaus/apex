@@ -17,10 +17,9 @@
       overflow: hidden;
     }
     
-   .viewer { 
+  .viewer { 
   width: 100vw;
   height: 100vh;
-  height: 100dvh; /* Dynamic viewport height - accounts for browser UI */
   display: flex;
   flex-direction: column;
   position: relative;
@@ -33,7 +32,6 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  min-height: 0; /* Important for flex child */
 }
 
 .image-container {
@@ -42,31 +40,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px 80px 110px 80px;
+  padding: 20px 80px;
 }
 
 @media (max-width: 768px) {
   .image-container {
-    padding: 10px 60px 100px 60px;
+    padding: 10px 60px;
   }
 }
 
 @media (max-width: 768px) and (orientation: landscape) {
   .image-container {
-    padding: 10px 60px 110px 60px; /* More bottom padding in landscape */
+    padding: 5px 60px 85px 60px; /* Only add bottom padding in landscape */
   }
   
   .bottom-bar {
-    padding: 12px 15px 8px;
-  }
-  
-  .page-dots {
-    gap: 5px;
-  }
-  
-  .dot {
-    width: 7px;
-    height: 7px;
+    padding: 10px 15px 8px; /* Make bottom bar more compact */
   }
 }
     /* Navigation buttons */
